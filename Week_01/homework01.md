@@ -92,3 +92,91 @@ interface Queue{
     # 2.检查 newCapacity 超容没有，如果超容就根据设置的最小容量来计算 newCapacity
             (minCapacity > MAX_ARRAY_SIZE) ? Integer.MAX_VALUE :  MAX_ARRAY_SIZE;
 ```
+
+## 3.删除排序数组中的重复项（Facebook、字节跳动、微软在半年内面试中考过）
+> 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 
+ 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。 
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
+
+思路：
+- 1.暴力法 ：双重循环
+```java
+class test{
+    public void rotate(int[] nums, int k) {
+            int temp, previous;
+            for (int i = 0; i < k; i++) {
+                previous = nums[nums.length - 1];
+                for (int j = 0; j < nums.length; j++) {
+                    temp = nums[j];
+                    nums[j] = previous;
+                    previous = temp;
+                }
+            }
+        }
+}
+```
+
+
+
+## 4.旋转数组（微软、亚马逊、PayPal 在半年内面试中考过）
+> 题目：给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+- 弟子规(自递归)
+```java
+class Test{
+    public void rotate(int[] nums, int k) {
+            if (k <= 0) return;
+            int temp = nums[nums.length - 1];
+            for (int i = nums.length - 1; i > 0; i--) {
+                nums[i] = nums[i - 1];
+            }
+            nums[0] = temp;
+            rotate(nums, k - 1);
+    }
+}
+```
+
+- 3次反转
+```java
+class Test{
+    public static void rotate(int[] nums, int k) {
+        reverse(nums, 0, nums.length - 1);//全返
+        k = k % nums.length;
+        reverse(nums, 0, k - 1);//反转头
+        reverse(nums, k, nums.length - 1);//反转尾
+    }
+    public static void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = temp;
+        }
+    }
+}
+```
+
+## 5.合并两个有序链表（亚马逊、字节跳动在半年内面试常考）
+>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+```java
+class Test{
+  public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+       if(l1==null){
+           return l2;
+       }else if(l2==null){
+           return l1;
+       }else if(l1.val<l2.val){
+           l1.next=mergeTwoLists(l1.next,l2);
+           return l1;
+       }else {
+           l2.next=mergeTwoLists(l1,l2.next);
+           return l2;
+       }        
+    }
+}
+```
+
+## 6.合并两个有序数组（Facebook 在半年内面试常考）
+
+## 7.两数之和（亚马逊、字节跳动、谷歌、Facebook、苹果、微软在半年内面试中高频常考）
+## 8.移动零（Facebook、亚马逊、苹果在半年内面试中考过）
+## 9.加一（谷歌、字节跳动、Facebook 在半年内面试中考过）
