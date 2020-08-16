@@ -155,7 +155,7 @@ class Test{
 }
 ```
 
-## 5.合并两个有序链表（亚马逊、字节跳动在半年内面试常考）
+    ## 5.合并两个有序链表（亚马逊、字节跳动在半年内面试常考）
 >将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 ```java
 class Test{
@@ -176,7 +176,153 @@ class Test{
 ```
 
 ## 6.合并两个有序数组（Facebook 在半年内面试常考）
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // l 表示从后向前当前插入位置
+        int l = m + n - 1;
+        // i 标记数组 nums1 当前比较位置
+        int i = m - 1;
+        // j 标记数组 nums2 当前比较位置
+        int j = n - 1;
+        //将数组 nums 2 全部数据插入到数组 nums1 为止
+        while (j >= 0 ) {
+            //当数组 nums1 当前可比较数据位 i 大于等于 0 并且数组 nums1 当前位置值比 nums2 当前位置值大时，将数组 nums1 当前位置数组 插入到 l 位置 ，i 位指针向前挪一位
+            //否则将 nums2 当前位置数据插入到 l 位置，j 位指针向前挪一位
+            //当前插入位置 l 向前挪一位
+            nums1[l--] =  (i >= 0 && nums1[i] >= nums2[j]) ? nums1[l] = nums1[i--] : nums2[j--];
+        }
+    }
+}
+```
 
 ## 7.两数之和（亚马逊、字节跳动、谷歌、Facebook、苹果、微软在半年内面试中高频常考）
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+       return twoSum2(nums,target);
+    }
+
+    //双重循环 时间复杂度O(n^2)
+    public int[] twoSum1(int[] nums, int target) {
+        
+        for(int i=0;i<nums.length-1;i++){
+            for(int j=i+1;j<nums.length;j++){
+                if(nums[i]+nums[j]==target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return new int[]{0,0};
+    }
+
+    //target是两个数之和，那么把每个数都看成一个因子，用一个map存储起来。每次去看
+    public int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> result = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+            int fator = target - nums[i];
+            if (result.containsKey(fator)) {
+                return new int[]{result.get(fator), i};
+            }
+            result.put(nums[i], i);
+        }
+        return null;
+    }
+}
+```
 ## 8.移动零（Facebook、亚马逊、苹果在半年内面试中考过）
+```java
+class Solution {
+    public void moveZeroes(int[] nums) {
+        moveZeroes1(nums);
+    }
+    //直接在原数组上操作
+    public void moveZeroes1(int[] nums) {
+        int j=0;
+        for(int i=0; i<nums.length;i++){
+            if(nums[i]!=0){
+                nums[j]=nums[i];
+                if(i!=j){
+                    nums[i]=0;
+                }
+              j++;  
+            }            
+        }
+    }
+}
+```
+
 ## 9.加一（谷歌、字节跳动、Facebook 在半年内面试中考过）
+```java
+class Solution {
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;//如果最高位等于零了那么说明进位了，要额外处理，反之就结束
+        }
+        digits = new int[digits.length + 1];//弥补最高位进位的bug
+        digits[0] = 1;
+        return digits;
+
+    }
+}
+```
+
+## 有效的字母异位词
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s == null || t == null || s.length() != t.length()) return false;
+
+        int chars[] = new int[26];
+        char[] charArray = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            chars[charArray[i] - 'a']++;
+            chars[t.charAt(i) - 'a']--;
+        }
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] != 0) return false;
+        }
+
+        return true;
+    }
+}
+```
+
+## 94. 二叉树的中序遍历
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+       List<Integer> result=new ArrayList();
+       helper(root,result);
+       return result;
+    }
+    private void helper(TreeNode root,List<Integer> result){
+        if(root==null) { 
+         return;
+        }
+        helper(root.left,result);
+        result.add(root.val);       
+        helper(root.right,result);
+    }
+}
+```
+
+## 剑指 Offer 40. 最小的k个数
+- 最简单的解法
+```java
+class Solution {
+    public int[] getLeastNumbers(int[] arr, int k) {
+        int[] a = new int[k];
+        Arrays.sort(arr);
+        for (int i = 0; i < k; i++) {
+            a[i] = arr[i];
+        }
+        return a;
+    }
+}
+```
