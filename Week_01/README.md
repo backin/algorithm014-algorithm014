@@ -53,5 +53,5 @@
 | 题号 | 名称 | 难度 | 分类 | 备注 |
 | --- | --- | --- | --- | --- |
 | [242](https://leetcode.com/problems/remove-duplicates-from-sorted-array/discuss/?currentPage=1&orderBy=most_votes&query=) | [有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)| 🟢 简单 | hash表 、排序 | - |
-| [94](https://leetcode.com/problems/rotate-array/discuss/?currentPage=1&orderBy=most_votes&query=) | [ 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)| 🟢 中等 | 树 | - |
+| [94](https://leetcode.com/problems/rotate-array/discuss/?currentPage=1&orderBy=most_votes&query=) | [ 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)| 🟡 中等 | 树 | - |
 | [offer-40](https://leetcode.com/problems/rotate-array/discuss/?currentPage=1&orderBy=most_votes&query=) | [ 二叉树的中序遍历](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)| 🟢 简单 | 堆、分治 | - |
